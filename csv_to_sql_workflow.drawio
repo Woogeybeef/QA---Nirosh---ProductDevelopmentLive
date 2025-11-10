@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" modified="2025-11-10T00:00:00.000Z" agent="GPT-5" version="21.6.1" editor="dot" type="device">
+  <diagram id="csv_sql_workflow" name="CSV to SQL Workflow">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- CSV Input -->
+        <mxCell id="2" value="Raw CSV Files (input)" style="shape=document;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="180" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Python Pandas Read -->
+        <mxCell id="3" value="Read CSV with Pandas (pd.read_csv)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Data Cleansing -->
+        <mxCell id="4" value="Cleanse Data (remove nulls, duplicates, trim spaces)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="600" y="200" width="260" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Output Cleaned CSV -->
+        <mxCell id="5" value="Export Cleaned Data (to_csv)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="920" y="200" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Load to SQL -->
+        <mxCell id="6" value="Load into SQL Database (to_sql)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="600" y="400" width="260" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- SQL Database -->
+        <mxCell id="7" value="SQL Database (PostgreSQL / MySQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#cdeb8b;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="960" y="400" width="180" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="8" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="9" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="10" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="4" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="11" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="4" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="12" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="6" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Labels -->
+        <mxCell id="13" value="Data Flow" style="text;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="150" width="100" height="30" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
