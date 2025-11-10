@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0" version="27.1.5">
+  <diagram name="CSV to SQL Workflow" id="snYu6Uju9okY7rtGKcWG">
+    <mxGraphModel dx="1418" dy="786" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-1" value="Raw CSV Files (input)" style="shape=document;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-2" value="Read CSV with Pandas (pd.read_csv)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-3" value="Cleanse Data (remove nulls, duplicates, trim spaces)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="600" y="200" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-4" value="Export Cleaned Data (to_csv)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="920" y="200" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-5" value="Load into SQL Database (to_sql)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="600" y="400" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-6" value="SQL Database (PostgreSQL / MySQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#cdeb8b;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="960" y="400" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-7" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="iPm-V55wKXxbZArZyfwQ-1" target="iPm-V55wKXxbZArZyfwQ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-8" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="iPm-V55wKXxbZArZyfwQ-2" target="iPm-V55wKXxbZArZyfwQ-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-9" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="iPm-V55wKXxbZArZyfwQ-3" target="iPm-V55wKXxbZArZyfwQ-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-10" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="iPm-V55wKXxbZArZyfwQ-3" target="iPm-V55wKXxbZArZyfwQ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-11" style="edgeStyle=elbowEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="iPm-V55wKXxbZArZyfwQ-5" target="iPm-V55wKXxbZArZyfwQ-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iPm-V55wKXxbZArZyfwQ-12" value="Data Flow" style="text;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="150" width="100" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
