@@ -1,5 +1,5 @@
 class Calculator:
-    def _init_(self, a, b):
+    def __init__(self, a, b):
         self.a = a
         self.b = b
     def get_sum(self):
