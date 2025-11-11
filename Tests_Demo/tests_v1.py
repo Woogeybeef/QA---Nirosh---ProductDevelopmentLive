@@ -3,7 +3,7 @@ from calculator_app import Calculator
 
 class TestOperations(unittest.TestCase):
 
-    def setup(self):        
+    def setUp(self):        
         self.calc = Calculator(8,2)
 
     def test_sum(self):
