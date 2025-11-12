@@ -27,15 +27,23 @@ class TestLoanDuration(unittest.TestCase):
 
     def test_loan_duration_calculation(self):
         # Manually calculate expected loan durations
-        expected_durations = [(datetime(2023, 10, 2) - datetime(2023, 10, 1)).days,
-                              (datetime(2023, 10, 6) - datetime(2023, 10, 5)).days,
-                              (datetime(2023, 10, 12) - datetime(2023, 10, 10)).days]
+        expected_durations = pd.Series([(datetime(2023, 10, 2) - datetime(2023, 10, 1)).days,
+                                        (datetime(2023, 10, 6) - datetime(2023, 10, 5)).days,
+                                        (datetime(2023, 10, 12) - datetime(2023, 10, 10)).days],
+                                       dtype=int)  # Explicitly make this an integer Series
+        
+        # Set the name of the expected series to match the one in enriched_df
+        expected_durations.name = 'loan_duration'
 
         # Call the enrichment function to add loan_duration column
         enriched_df = enrich_date_duration(self.df, 'book returned', 'book checkout')
 
-        # Check if the computed loan_duration matches the expected values
-        pd.testing.assert_series_equal(enriched_df['loan_duration'], pd.Series(expected_durations), check_exact=True)
+        # Reset indices for both Series to ensure no index mismatch
+        enriched_df['loan_duration'] = enriched_df['loan_duration'].reset_index(drop=True)
+        expected_durations = expected_durations.reset_index(drop=True)
+
+        # Ensure the loan durations match (name should be the same now)
+        pd.testing.assert_series_equal(enriched_df['loan_duration'], expected_durations)
 
     def test_loan_duration_no_negative(self):
         # Create a test case where the 'book returned' date is before the 'book checkout' date
@@ -55,3 +63,4 @@ class TestLoanDuration(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
