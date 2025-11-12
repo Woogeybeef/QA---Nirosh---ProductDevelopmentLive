@@ -85,12 +85,14 @@ def cleanse_data(input_file, server_name, database_name):
     # Make sure the columns for the date calculations exist
     if 'book checkout' in df.columns and 'book returned' in df.columns:
         df = enrich_date_duration(df, 'book returned', 'book checkout')
+        # Ensure that loan_duration is non-negative
+        df = df[df['loan_duration'] >= 0]  # Filter out negative durations
     else:
         print("One or both of the date columns ('book checkout', 'book returned') are missing. Skipping enrichment.")
 
     # Drop rows where loan_duration is less than 0
-    if 'book checkout' in df.columns and 'book returned' in df.columns:
-        df = df[df['loan_duration'] >= 0]
+    #if 'book checkout' in df.columns and 'book returned' in df.columns:
+    #    df = df[df['loan_duration'] >= 0]
 
     # Define the connection string to your MS SQL Server
     server = server_name  
@@ -119,7 +121,11 @@ def enrich_date_duration(df, colA, colB):
     colA should be the later of the two date columns (e.g., 'book returned').
     """
     if colA in df.columns and colB in df.columns:
+        # Calculate loan duration in days
         df['loan_duration'] = (df[colA] - df[colB]).dt.days
+
+        # Ensure loan duration is non-negative, replace negative durations with NaN or 0
+        df['loan_duration'] = df['loan_duration'].apply(lambda x: max(x, 0))  # Replace negative durations with 0
     return df
 
 # Main function to handle command-line arguments
