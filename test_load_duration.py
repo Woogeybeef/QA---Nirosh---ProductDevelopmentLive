@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 
 # Assuming `enrich_date_duration` is available from your code
-from your_module import enrich_date_duration  # Replace with the correct import if needed
+from "C:/Users/Admin/Desktop/QA---Nirosh---ProductDevelopmentLive".clean_data import enrich_date_duration  # Replace with the correct import if needed
 
 class TestLoanDuration(unittest.TestCase):
 
