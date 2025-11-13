@@ -49,7 +49,7 @@ The script also inserts both the cleaned data and metrics into a SQL Server data
   - `numpy`
   - `sqlalchemy`
   - `pyodbc`
-  - pip install pandas numpy sqlalchemy pyodbc
+  - `pip install pandas numpy sqlalchemy pyodbc`
 - A running SQL Server database with the following table structure for metrics:
   
   
