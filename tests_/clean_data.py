@@ -4,7 +4,6 @@ import os
 import glob
 import time
 from sqlalchemy import create_engine, text
-import numpy as np  # Import numpy for type handling
 
 # Function to cleanse data and track metrics
 def cleanse_data(input_file, engine):
@@ -12,7 +11,7 @@ def cleanse_data(input_file, engine):
         'rows_processed': 0,  # Total rows processed
         'rows_removed': 0,    # Rows removed due to null or duplicates
         'rows_modified': 0,   # Rows modified (e.g., lowercased, date converted)
-        'processing_time_seconds': 0  # Time taken for processing (in seconds)
+        'processing_time': 0  # Time taken for processing (in seconds)
     }
 
     base_name = os.path.splitext(os.path.basename(input_file))[0]
@@ -87,7 +86,7 @@ def cleanse_data(input_file, engine):
     print(f"Rows processed: {metrics['rows_processed']}")
     print(f"Rows removed: {metrics['rows_removed']}")
     print(f"Rows modified: {metrics['rows_modified']}")
-    print(f"Processing time: {metrics['processing_time']}")
+    print(f"Processing time (seconds): {metrics['processing_time']}")
     
     return metrics
 
@@ -97,39 +96,30 @@ def insert_data_to_sql(df, base_name, engine):
     """
     table_name = base_name + "_cleaned"  # Use the base name for the table name
 
-    # Ensure that all columns in the dataframe are of correct types
-    for col in df.select_dtypes(include=[np.int64, np.float64]).columns:
-        df[col] = df[col].astype('float64')  # Ensure numpy types are converted to Python types
-
     # Insert the DataFrame into the SQL table
     df.to_sql(table_name, con=engine, if_exists='replace', index=False)
 
     print(f"Data saved to SQL table: {table_name}")
 
-import pandas as pd
-
 def insert_metrics_to_sql(metrics, file_name, engine):
     """
-    Insert metrics into the SQL table using DataFrame and pandas `to_sql`.
+    Insert metrics into the SQL table.
     """
-    # Convert numpy types to native Python types to avoid issues
-    metrics = {key: int(value) if isinstance(value, (np.int64, np.float64, float, int)) else value
-               for key, value in metrics.items()}
+    query = """
+        INSERT INTO data_cleaning_metrics (file_name, rows_processed, rows_removed, rows_modified, processing_time_seconds)
+        VALUES (:file_name, :rows_processed, :rows_removed, :rows_modified, :processing_time_seconds)
+    """
     
-    # Convert the metrics dictionary into a DataFrame
-    metrics_df = pd.DataFrame([metrics])  # Wrap the metrics dict in a list to create a single row DataFrame
-    metrics_df['file_name'] = file_name  # Add the file_name to the DataFrame
-    
-    # Ensure the DataFrame has the same column names as the table
-    # Here we're assuming the table has columns: file_name, rows_processed, rows_removed, rows_modified, processing_time_seconds
-    metrics_df = metrics_df[['file_name', 'rows_processed', 'rows_removed', 'rows_modified', 'processing_time_seconds']]
-    
-    # Insert the DataFrame into the SQL table
-    metrics_df.to_sql('data_cleaning_metrics', con=engine, if_exists='append', index=False)
-    
-    print(f"Metrics for {file_name} inserted into SQL.")
-
-
+    # Ensure you are using an open connection to execute the query
+    with engine.connect() as connection:
+        # Use `text()` to indicate that we're passing raw SQL query with parameters
+        connection.execute(text(query), {
+            'file_name': file_name,
+            'rows_processed': metrics['rows_processed'],
+            'rows_removed': metrics['rows_removed'],
+            'rows_modified': metrics['rows_modified'],
+            'processing_time_seconds': metrics['processing_time']
+        })
 
 def main():
     parser = argparse.ArgumentParser(description="Cleanse CSV data and track metrics.")
@@ -159,11 +149,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
 
