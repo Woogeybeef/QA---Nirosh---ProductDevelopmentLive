@@ -1,6 +1,12 @@
 id,books,book checkout,book returned,days allowed to borrow,customer id,loan_duration
 1.0,Catcher in the Rye ,2023-02-20,2023-02-25,2 weeks,1.0,5
+2.0,Lord of the rings the two towers,2023-03-24,2023-03-21,2 weeks,2.0,0
+3.0,Lord of the rings the return of the kind,2023-03-29,2023-03-25,2 weeks,3.0,0
+4.0,The hobbit,2023-04-02,2023-03-25,2 weeks,4.0,0
+5.0,Dune ,2023-04-02,2023-03-25,2 weeks,5.0,0
 6.0,Little Women,2023-04-02,2023-05-01,2 weeks,1.0,29
+7.0,IT,2063-04-10,2023-04-03,2 weeks,6.0,0
+8.0,Misery ,2023-04-15,2023-04-03,2 weeks,7.0,0
 9.0,Catch 22,2023-04-15,2023-04-16,2 weeks,7.0,1
 10.0,Animal Farm ,2023-04-20,2023-04-24,2 weeks,2.0,4
 11.0,1984,2023-04-23,2023-04-27,2 weeks,8.0,4
